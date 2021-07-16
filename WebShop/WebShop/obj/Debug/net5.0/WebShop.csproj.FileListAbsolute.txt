@@ -387,3 +387,4 @@ D:\TESTY\Web-Shop\WebShop\WebShop\obj\Debug\net5.0\WebShop.dll
 D:\TESTY\Web-Shop\WebShop\WebShop\obj\Debug\net5.0\ref\WebShop.dll
 D:\TESTY\Web-Shop\WebShop\WebShop\obj\Debug\net5.0\WebShop.pdb
 D:\TESTY\Web-Shop\WebShop\WebShop\obj\Debug\net5.0\WebShop.genruntimeconfig.cache
+D:\TESTY\Web-Shop\WebShop\WebShop\bin\Debug\net5.0\libman.json

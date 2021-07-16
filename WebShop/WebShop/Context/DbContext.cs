@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebShop.Models;
 
 namespace WebShop.Context
 {
@@ -14,5 +15,9 @@ namespace WebShop.Context
 		{
 
 		}
+
+		public DbSet<ShoppingCartModel> ShoppingCart { get; set; }
+			public DbSet<WarehouseModel> Warehouse { get; set; }
+	
 	}
 }
