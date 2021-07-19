@@ -22,7 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Interfaces\" />
+    <Folder Include="Views\ShopCategory\" />
+    <Folder Include="Views\Warehouse\" />
+    <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
 
 </Project>
