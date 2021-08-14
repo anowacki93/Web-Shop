@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebShop.Services;
+using WebShop.Services.Interfaces;
 
 namespace WebShop
 {
@@ -26,11 +28,15 @@ namespace WebShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context.DbContext>(builder =>
+            services.AddDbContext<Context.WebShopDbContext>(builder =>
             {
                 builder.UseSqlServer(Configuration["DefaultConnection"]);
             });
             //services.AddControllersWithViews();
+            services.AddScoped<IShopCategoryService, ShopCategoryService>();
+            services.AddScoped<IShoppingCartService, ShoppingCartService>();
+            services.AddScoped<IWarehouseService, WarehouseService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddMvc();
         }
 

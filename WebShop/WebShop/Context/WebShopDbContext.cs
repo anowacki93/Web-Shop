@@ -9,15 +9,15 @@ using WebShop.Models;
 
 namespace WebShop.Context
 {
-	public class DbContext : IdentityDbContext
+	public class WebShopDbContext : IdentityDbContext
 	{
-		public DbContext(DbContextOptions<DbContext> options) : base(options)
+		public WebShopDbContext(DbContextOptions<WebShopDbContext> options) : base(options)
 		{
 
 		}
 
-		public DbSet<ShoppingCartModel> ShoppingCart { get; set; }
-			public DbSet<WarehouseModel> Warehouse { get; set; }
-	
+		public DbSet<ShopCategoryModel> Categories { get; set; }
+		public DbSet<ProductModel> Products{ get; set; }
+
 	}
 }

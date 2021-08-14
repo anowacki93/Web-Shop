@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebShop.Services.Interfaces
 {
-    public interface IShopCategory
+    public interface IShoppingCartService
     {
     }
 }

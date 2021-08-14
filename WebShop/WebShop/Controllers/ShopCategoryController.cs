@@ -6,32 +6,102 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShop.Models;
+using WebShop.Services.Interfaces;
 
 namespace WebShop.Controllers
 {
     public class ShopCategoryController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public ShopCategoryController(ILogger<HomeController> logger)
+        private readonly IShopCategoryService _modelService;
+        public ShopCategoryController(IShopCategoryService modelService)
         {
-            _logger = logger;
+            _modelService = modelService;
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
+        {   //Po utworzeniu userów
+            //var user = User.Identity.Name;
+            //var modelData = _modelService.GetAll().Where(x => x.UserId == user);
+            //Przed utworzeniem userow
+            var modelData = _modelService.GetAll();
 
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(modelData);
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Create()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ShopCategoryModel model = new ShopCategoryModel();
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Create([FromForm] ShopCategoryModel model) //[FromForm] - potrzebne do mapowania danych z formularza na obiekt w przypadku gdy korzystamy z Razora lub zwykłego HTMLa. Przy taghelperach nie jest to konieczne tak jak w tym przypadku
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //model.UserId = User.Identity.Name;
+
+                    _modelService.Create(model);
+                    //context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return View(model);
+                }
+                return Redirect("Index");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+        public IActionResult Remove(int id)
+        {
+            return View(_modelService.Get(id));
+        }
+        [HttpPost]
+        public IActionResult RemoveConfirm(int id)
+        {
+            try
+            {
+                _modelService.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException);
+                throw;
+            }
+            return Redirect("Index");
+        }
+        public IActionResult Edit(int id)
+        {
+            return View(_modelService.Get(id));
+        }
+        [HttpPost]
+        public IActionResult EditSave(ShopCategoryModel model)
+        {
+            try
+            {
+
+                _modelService.Update(model);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException);
+                throw;
+            }
+            return Redirect("Index");
+        }
+        public IActionResult Details(int id)
+        {
+            return View(_modelService.Get(id));
+        }
+        public IActionResult Show()
+        {
+            var modelData = _modelService.GetAll();
+            return View(modelData.Count());
         }
     }
 }
